@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public interface Iterador<T> {
 
-	public void append(T dado) ;
+	public void inserir(T dado) ;
 	
 	public void addFirst(T dado) ;
 	

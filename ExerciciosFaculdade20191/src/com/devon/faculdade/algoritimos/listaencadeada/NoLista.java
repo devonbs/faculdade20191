@@ -1,10 +1,10 @@
 package com.devon.faculdade.algoritimos.listaencadeada;
 
-public class Dado<T> {
+public class NoLista<T> {
 	
 	private T dado;
-	private Dado<T> proximoDado;
-	private Dado<T> dadoAnterior;
+	private NoLista<T> proximoDado;
+	private NoLista<T> dadoAnterior;
 	
 	public T getDado() {
 		return dado;
@@ -12,16 +12,16 @@ public class Dado<T> {
 	public void setDado(T dado) {
 		this.dado = dado;
 	}
-	public Dado<T> getProximoDado() {
+	public NoLista<T> getProximoDado() {
 		return proximoDado;
 	}
-	public void setProximoDado(Dado<T> proximoDado) {
+	public void setProximoDado(NoLista<T> proximoDado) {
 		this.proximoDado = proximoDado;
 	}
-	public Dado<T> getDadoAnterior() {
+	public NoLista<T> getDadoAnterior() {
 		return dadoAnterior;
 	}
-	public void setDadoAnterior(Dado<T> dadoAnterior) {
+	public void setDadoAnterior(NoLista<T> dadoAnterior) {
 		this.dadoAnterior = dadoAnterior;
 	}
 	@Override
