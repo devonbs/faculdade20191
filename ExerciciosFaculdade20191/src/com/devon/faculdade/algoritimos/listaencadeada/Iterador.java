@@ -11,7 +11,7 @@ public interface Iterador<T> {
 	
 	public T search(Comparator<T> cmp) ;
 	
-	public void printObjects() ;
+	public void exibir() ;
 	
 	public ListaEncadeada<T> loadFromFile(InputStream input) ;
 	

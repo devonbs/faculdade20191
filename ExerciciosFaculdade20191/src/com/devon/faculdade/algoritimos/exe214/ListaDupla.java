@@ -1,68 +1,60 @@
-package com.devon.faculdade.algoritimos.listaencadeada;
+package com.devon.faculdade.algoritimos.exe214;
 
-import java.io.InputStream;
 import java.util.Comparator;
 
-public class ListaEncadeada<T> implements Iterador<T>{
+public class ListaDupla<T> {
 
-	private NoLista<T> dado;	
-	private NoLista<T> primeiro = null;
-	private NoLista<T> ultimo = null;
+	private NoListaDupla<T> dado;	
+	private NoListaDupla<T> primeiro = null;
+	private NoListaDupla<T> ultimo = null;
+	
+	public ListaDupla() {
+		primeiro = null;
+	}
 	
 	
-	
-	@Override
 	public void inserir(T novoDado) {
-		dado = new NoLista<T>();
+		dado = new NoListaDupla<T>();
 		dado.setDado(novoDado);
-		if(this.primeiro == null) {
-			addFirst(dado.getDado());
-		} 
-		if(this.ultimo == null) {
-			ultimo = primeiro;
-		} else {
-			this.ultimo.setProximoDado(dado);
-			NoLista<T> dadoAnterior = ultimo;
+		dado.setProximoDado(primeiro);
+		dado.setDadoAnterior(null);
+		if(primeiro != null) {
+			primeiro.setDadoAnterior(dado);
 			ultimo = dado;
-			this.ultimo.setProximoDado(null);
-		}		
+		}
+		primeiro = dado;
 		
 	}
-	@Override
+	
 	public void addFirst(T novoDado) {
 		if(this.primeiro == null) {
-			//primeiro = new Dado<T>();
 			primeiro = dado;
 			primeiro.setDado(novoDado);
 		} else {
-			NoLista<T> dado = this.dado;
+			NoListaDupla<T> dado = this.dado;
 			primeiro.setDado(novoDado);
 			primeiro.setProximoDado(dado);
 		}
 		
 	}
-	@Override
-	public T search(Comparator<T> cmp) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
+
 	public void exibir() {
-		NoLista<T> dadoAtual = primeiro;
+		NoListaDupla<T> dadoAtual = primeiro;
 		while(dadoAtual != null) {
 			System.out.println(dadoAtual.toString());
 			dadoAtual = dadoAtual.getProximoDado();
 		}
-
-		
-	}
-	@Override
-	public ListaEncadeada<T> loadFromFile(InputStream input) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
-	public NoLista<T> getPrimeiro() {
+	public void exibirOrdemInversa() {
+		NoListaDupla<T> dadoAtual = ultimo;
+		while(dadoAtual != null) {
+			System.out.println(dadoAtual.toString());
+			dadoAtual = dadoAtual.getDadoAnterior();
+		}
+	}
+	
+	public NoListaDupla<T> getPrimeiro() {
 		return primeiro;
 	}
 	
@@ -71,8 +63,8 @@ public class ListaEncadeada<T> implements Iterador<T>{
 	}
 	
 	public void retirar(T dado) {
-		NoLista<T> dadoAtual = primeiro;
-		NoLista<T> anterior = null;
+		NoListaDupla<T> dadoAtual = primeiro;
+		NoListaDupla<T> anterior = null;
 		while(dadoAtual != null && !dadoAtual.getDado().equals(dado)) {
 			anterior = dadoAtual;
 			dadoAtual = dadoAtual.getProximoDado();
@@ -83,12 +75,13 @@ public class ListaEncadeada<T> implements Iterador<T>{
 				this.primeiro = dadoAtual.getProximoDado();
 			} else {
 				anterior.setProximoDado(dadoAtual.getProximoDado());
+				dadoAtual.getProximoDado().setDadoAnterior(dadoAtual.getDadoAnterior());
 			}
 		}
 	}
 	
-	public NoLista<T> buscar(T dado) {
-		NoLista<T> dadoAtual = primeiro;
+	public NoListaDupla<T> buscar(T dado) {
+		NoListaDupla<T> dadoAtual = primeiro;
 		while(dadoAtual != null) {
 			if(dadoAtual.equals(dado)) {
 				return dadoAtual;
@@ -100,7 +93,7 @@ public class ListaEncadeada<T> implements Iterador<T>{
 	
 	public int obterComprimeito() {
 		int tamanho = 0;
-		NoLista<T> dadoAtual = primeiro;
+		NoListaDupla<T> dadoAtual = primeiro;
 		while(dadoAtual != null) {
 			tamanho++;
 			dadoAtual = dadoAtual.getProximoDado();
@@ -108,9 +101,9 @@ public class ListaEncadeada<T> implements Iterador<T>{
 		return tamanho;
 	}
 	
-	public NoLista<T> obterNo(int posicao) {
+	public NoListaDupla<T> obterNo(int posicao) {
 		int posicaoAtual = 0;
-		NoLista<T> dadoAtual = primeiro;
+		NoListaDupla<T> dadoAtual = primeiro;
 		if(posicao < 0) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -124,6 +117,19 @@ public class ListaEncadeada<T> implements Iterador<T>{
 		}
 		return null;
 		
+	}
+	
+	public void liberar() {
+		NoListaDupla<T> dadoAtual = primeiro;
+		NoListaDupla<T> dadoAnterior = null;
+		while(dadoAtual != null) {
+			dadoAnterior = dadoAtual.getDadoAnterior();
+			if(dadoAnterior != null) {
+				dadoAnterior.setProximoDado(null);
+				dadoAnterior.setDadoAnterior(null);
+			}
+			dadoAtual = dadoAtual.getProximoDado();
+		}
 	}
 	
 }
