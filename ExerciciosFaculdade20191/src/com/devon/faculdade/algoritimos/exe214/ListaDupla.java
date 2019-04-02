@@ -14,12 +14,15 @@ public class ListaDupla<T> {
 		NoListaDupla<T> novoDado = new NoListaDupla<T>();
 		novoDado.setDado(dado);
 		novoDado.setProximoDado(primeiro);
-		//novoDado.setDadoAnterior(null);
+		novoDado.setDadoAnterior(null);
 		if(primeiro != null) {
 			primeiro.setDadoAnterior(novoDado);
-			ultimo = novoDado.getProximoDado();
 			//primeiro.setProximoDado(novoDado.getDadoAnterior());
-		} 
+		}
+		if (ultimo == null) {
+			ultimo = novoDado;
+			ultimo.setDadoAnterior(novoDado);
+		}
 		primeiro = novoDado;
 	}
 	
@@ -60,7 +63,9 @@ public class ListaDupla<T> {
 				this.primeiro = dadoAtual.getProximoDado();
 			} else {
 				anterior.setProximoDado(dadoAtual.getProximoDado());
-				dadoAtual.getProximoDado().setDadoAnterior(dadoAtual.getDadoAnterior());
+				if(dadoAtual.getProximoDado() != null) {
+					dadoAtual.getProximoDado().setDadoAnterior(dadoAtual.getDadoAnterior());
+				}
 			}
 		}
 	}
@@ -115,6 +120,21 @@ public class ListaDupla<T> {
 			}
 			dadoAtual = dadoAtual.getProximoDado();
 		}
+		primeiro = null;
+	}
+	
+	@Override
+	public String toString() {
+		NoListaDupla<T> dadoAtual = primeiro;
+		StringBuilder sb = new StringBuilder();
+		while(dadoAtual != null) {
+			sb.append(dadoAtual.toString());
+			dadoAtual = dadoAtual.getProximoDado();
+			if(dadoAtual != null) {
+				sb.append(", ");
+			}
+		}
+		return sb.toString();
 	}
 	
 }

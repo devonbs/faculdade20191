@@ -16,6 +16,18 @@ public class Main {
 		
 		listaDupla.exibirOrdemInversa();
 		listaDupla.exibir();
+		System.out.println("retirar 1");
+		listaDupla.retirar("1");
+		listaDupla.exibir();
+		System.out.println("retirar 8");
+		listaDupla.retirar("8");
+		listaDupla.exibir();
+		System.out.println("retirar 4");
+		listaDupla.retirar("4");
+		listaDupla.exibir();
+		System.out.println("retirar 2");
+		listaDupla.retirar("2");
+		listaDupla.exibir();
 	}
 
 }
