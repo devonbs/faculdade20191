@@ -4,7 +4,7 @@ public class NoLista<T> {
 	
 	private T dado;
 	private NoLista<T> proximoDado;
-	//private NoLista<T> dadoAnterior;
+	private NoLista<T> dadoAnterior;
 	
 	public T getDado() {
 		return dado;
@@ -18,12 +18,12 @@ public class NoLista<T> {
 	public void setProximoDado(NoLista<T> proximoDado) {
 		this.proximoDado = proximoDado;
 	}
-//	public NoLista<T> getDadoAnterior() {
-//		return dadoAnterior;
-//	}
-//	public void setDadoAnterior(NoLista<T> dadoAnterior) {
-//		this.dadoAnterior = dadoAnterior;
-//	}
+	public NoLista<T> getDadoAnterior() {
+		return dadoAnterior;
+	}
+	public void setDadoAnterior(NoLista<T> dadoAnterior) {
+		this.dadoAnterior = dadoAnterior;
+	}
 	@Override
 	public String toString() {
 		return  dado.toString();

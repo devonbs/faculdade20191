@@ -3,6 +3,8 @@ package com.devon.faculdade.algoritimos.listaencadeada;
 import java.io.InputStream;
 import java.util.Comparator;
 
+import com.devon.faculdade.algoritimos.exe214.NoListaDupla;
+
 public class ListaEncadeada<T> implements Iterador<T>{
 
 	private NoLista<T> dado;	
@@ -56,6 +58,15 @@ public class ListaEncadeada<T> implements Iterador<T>{
 
 		
 	}
+	
+	public void exibirOrdemInversa() {
+		NoLista<T> dadoAtual = ultimo;
+		while(dadoAtual != null) {
+			System.out.println(dadoAtual.toString());
+			dadoAtual = dadoAtual.getDadoAnterior();
+		}
+	}
+	
 	@Override
 	public ListaEncadeada<T> loadFromFile(InputStream input) {
 		// TODO Auto-generated method stub

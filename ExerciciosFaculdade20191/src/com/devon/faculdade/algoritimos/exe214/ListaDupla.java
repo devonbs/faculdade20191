@@ -1,10 +1,7 @@
 package com.devon.faculdade.algoritimos.exe214;
 
-import java.util.Comparator;
-
 public class ListaDupla<T> {
 
-	private NoListaDupla<T> dado;	
 	private NoListaDupla<T> primeiro = null;
 	private NoListaDupla<T> ultimo = null;
 	
@@ -13,31 +10,19 @@ public class ListaDupla<T> {
 	}
 	
 	
-	public void inserir(T novoDado) {
-		dado = new NoListaDupla<T>();
-		dado.setDado(novoDado);
-		dado.setProximoDado(primeiro);
-		dado.setDadoAnterior(null);
+	public void inserir(T dado) {
+		NoListaDupla<T> novoDado = new NoListaDupla<T>();
+		novoDado.setDado(dado);
+		novoDado.setProximoDado(primeiro);
+		//novoDado.setDadoAnterior(null);
 		if(primeiro != null) {
-			primeiro.setDadoAnterior(dado);
-			ultimo = dado;
-		}
-		primeiro = dado;
-		
+			primeiro.setDadoAnterior(novoDado);
+			ultimo = novoDado.getProximoDado();
+			//primeiro.setProximoDado(novoDado.getDadoAnterior());
+		} 
+		primeiro = novoDado;
 	}
 	
-	public void addFirst(T novoDado) {
-		if(this.primeiro == null) {
-			primeiro = dado;
-			primeiro.setDado(novoDado);
-		} else {
-			NoListaDupla<T> dado = this.dado;
-			primeiro.setDado(novoDado);
-			primeiro.setProximoDado(dado);
-		}
-		
-	}
-
 	public void exibir() {
 		NoListaDupla<T> dadoAtual = primeiro;
 		while(dadoAtual != null) {
