@@ -13,21 +13,11 @@ public class Main {
 		listaDupla.inserir("6");
 		listaDupla.inserir("7");
 		listaDupla.inserir("8");
+		listaDupla.exibir();
 		
-		listaDupla.exibirOrdemInversa();
-		listaDupla.exibir();
-		System.out.println("retirar 1");
-		listaDupla.retirar("1");
-		listaDupla.exibir();
-		System.out.println("retirar 8");
-		listaDupla.retirar("8");
-		listaDupla.exibir();
-		System.out.println("retirar 4");
-		listaDupla.retirar("4");
-		listaDupla.exibir();
-		System.out.println("retirar 2");
-		listaDupla.retirar("2");
-		listaDupla.exibir();
+		System.out.println("NOVA LISTA");
+		ListaDupla<String> novaLista = listaDupla.clonar();
+		novaLista.exibir();
 	}
 
 }

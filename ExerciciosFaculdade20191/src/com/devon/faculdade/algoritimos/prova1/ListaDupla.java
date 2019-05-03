@@ -1,4 +1,4 @@
-package com.devon.faculdade.algoritimos.exe214;
+package com.devon.faculdade.algoritimos.prova1;
 
 public class ListaDupla<T> {
 
