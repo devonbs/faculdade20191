@@ -1,26 +1,33 @@
 package com.devon.faculdade.algoritimos.trabalho1;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Main {
 	
+	private final static Path path = Paths.get("html.txt");
+	
 	public static void main(String[] args) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("<!DOCTYPE html>\r\n");
-		sb.append("<html>\r\n");
-		sb.append("<body>\r\n");
-		sb.append("<h1>\r\n");
-		sb.append("cabeçalho do arquivo\r\n");
-		sb.append("<a href=\"vá se foder\">link</a>");
-		sb.append("</h1>\r\n");
-		sb.append("<p>\r\n");
-		sb.append("paragrafo de pagina\r\n");
-		sb.append("</p>\r\n");
-		sb.append("<p>\r\n");
-		sb.append("segundo paragrafo\r\n");
-		sb.append("</p>\r\n");
-		sb.append("</body>\r\n");
-		sb.append("</html>\r\n");
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("<!DOCTYPE html>\r\n");
+//		sb.append("<html>\r\n");
+//		sb.append("<body>\r\n");
+//		sb.append("<h1>\r\n");
+//		sb.append("cabeçalho do arquivo\r\n");
+//		sb.append("<a href=aaaaaa>link</a>");
+//		sb.append("</h1>\r\n");
+//		sb.append("<p>\r\n");
+//		sb.append("paragrafo de pagina\r\n");
+//		sb.append("</p>\r\n");
+//		sb.append("<p>\r\n");
+//		sb.append("segundo paragrafo\r\n");
+//		sb.append("</p>\r\n");
+//		sb.append("</body>\r\n");
+//		sb.append("</html>\r\n");
 		
-		String teste = sb.toString();
+		//String teste = sb.toString();
+		
+		String teste = LeituraArquivos.carregarArquivo(path);
 		Main main = new Main();
 		main.lerStringTag(teste);
 		
@@ -53,6 +60,9 @@ public class Main {
 				tagFormatada += '>';
 				if(verificaSingletonTag(tagFormatada)) {
 					tagsSingleton.inserir(tagFormatada);
+					tagFormatada = "";
+					abriu = false;
+					continue;
 				}
 				
 				if(tagFecha) {
@@ -60,8 +70,11 @@ public class Main {
 					if(pilha.peek().equals(tagFechamento)) {
 						tagsFormatadas.inserir(pilha.pop());
 					} else {
-						//throw new RuntimeException("Esperava tag " + pilha.peek() + " - Encontrou - " + tagFormatada);
+						throw new RuntimeException("Esperava tag " + pilha.peek() + " - Encontrou - " + tagFormatada);
 					}
+					tagFormatada = "";
+					abriu = false;
+					tagFecha = false;
 				} else {
 					pilha.push(tagFormatada);
 					tagFormatada = "";
@@ -72,12 +85,24 @@ public class Main {
 				tagFormatada += tag.charAt(i);
 			}
 		}
+		
+		for (int i = 0; i < pilha.getTamanho(); i++) {
+			System.out.println("Tags não encontradas");
+			System.out.println(tagFechamentoNaoEncontrada(pilha.pop()));
+		}
 		System.out.println(pilha.toString());
 		System.out.println("tags formatadas");
-		tagsFormatadas.exibir();
+		exibirTagsFormatadas(tagsFormatadas);
 		System.out.println("tags singleton");
 		tagsSingleton.exibir();
 		return tagFormatada;
+	}
+
+	private void exibirTagsFormatadas(ListaEstatica<String> tagsFormatadas) {
+		for (int i = 0; i < tagsFormatadas.getTamanho(); i++) {
+			
+		}
+		
 	}
 
 	private boolean verificaSingletonTag(String tagFormatada) {
@@ -97,6 +122,17 @@ public class Main {
 			if(tagFormatada.charAt(i) != '/') {
 				tag += tagFormatada.charAt(i);
 			}
+		}
+		return tag;
+	}
+	
+	private String tagFechamentoNaoEncontrada(String tagFormatada) {
+		String tag = "";
+		for (int i = 0; i < tagFormatada.length(); i++) {
+			if(i == 1) {
+				tag += '/';
+			} 
+			tag += tagFormatada.charAt(i);
 		}
 		return tag;
 	}
