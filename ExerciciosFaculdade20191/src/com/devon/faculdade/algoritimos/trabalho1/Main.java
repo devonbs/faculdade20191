@@ -3,11 +3,13 @@ package com.devon.faculdade.algoritimos.trabalho1;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.swing.JFileChooser;
+
 public class Main {
 	
-	private final static Path path = Paths.get("html.txt");
 	
-	public static void main(String[] args) {
+	
+	public static void main(String[] args)  {
 //		StringBuilder sb = new StringBuilder();
 //		sb.append("<!DOCTYPE html>\r\n");
 //		sb.append("<html>\r\n");
@@ -26,10 +28,13 @@ public class Main {
 //		sb.append("</html>\r\n");
 		
 		//String teste = sb.toString();
+		JFileChooser escolher = new JFileChooser();
+		escolher.showOpenDialog(null);	
 		
-		String teste = LeituraArquivos.carregarArquivo(path);
+		final Path path = Paths.get(escolher.getSelectedFile().getAbsolutePath());
+		String dados = LeituraArquivos.carregarArquivo(path);
 		Main main = new Main();
-		main.lerStringTag(teste);
+		main.lerStringTag(dados);
 		
 		
 	}
@@ -86,23 +91,51 @@ public class Main {
 			}
 		}
 		
-		for (int i = 0; i < pilha.getTamanho(); i++) {
+		if (!pilha.estaVazia()){
 			System.out.println("Tags não encontradas");
-			System.out.println(tagFechamentoNaoEncontrada(pilha.pop()));
+			for (int i = 0; i < pilha.getTamanho(); i++) {
+				System.out.println(tagFechamentoNaoEncontrada(pilha.pop()));
+			}
 		}
-		System.out.println(pilha.toString());
-		System.out.println("tags formatadas");
-		exibirTagsFormatadas(tagsFormatadas);
-		System.out.println("tags singleton");
-		tagsSingleton.exibir();
+		
+		if (!tagsSingleton.estaVazia()) {
+			imprimeTags(tagsSingleton);
+		}
+		if (!tagsFormatadas.estaVazia()) {
+			exibirTagsFormatadas(tagsFormatadas);
+			contarTagsRepetidas(tagsFormatadas);
+		}
+		
 		return tagFormatada;
 	}
 
+	private void imprimeTags(ListaEstatica<String> tags) {
+		System.out.println("tags singleton");
+		tags.exibir();
+	}
+
 	private void exibirTagsFormatadas(ListaEstatica<String> tagsFormatadas) {
+		System.out.println("tags formatadas");
+		System.out.println(tagsFormatadas.toString());
+	}
+	
+	private void contarTagsRepetidas(ListaEstatica<String> tagsFormatadas) {
+		ListaEstatica<String> tagsContadas = new ListaEstatica<String>();
+		boolean existe = false;
+		int quantidade = 0;
+		System.out.println("Contar TAGS Repetidas");
 		for (int i = 0; i < tagsFormatadas.getTamanho(); i++) {
-			
+			for (int j = 0; j < tagsContadas.getTamanho(); j++) {
+				if(tagsContadas.obterElemento(i).equals(tagsFormatadas.obterElemento(j))) {
+					existe = true;
+				} else {
+					tagsContadas.inserir(tagsFormatadas.obterElemento(i));
+				}
+				quantidade++;
+			}
+			System.out.println(tagsFormatadas.obterElemento(i) + " " + quantidade);
+			quantidade = 0;
 		}
-		
 	}
 
 	private boolean verificaSingletonTag(String tagFormatada) {

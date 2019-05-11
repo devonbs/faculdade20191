@@ -72,6 +72,14 @@ public class ListaEstatica<T> {
 		}
 	}
 	
+	public T obterElemento(int posicao) {
+		if(posicao >= 0 && (posicao < tamanho)) {
+			return info[posicao];
+		} else {
+			throw new IndexOutOfBoundsException();
+		}
+	}
+	
 	public boolean estaVazia() {
 		return tamanho == 0;
 	}

@@ -14,7 +14,7 @@ public class LeituraArquivos {
 	public static String carregarArquivo(Path path){
         String arquivoHtml;
         try {	
-        	InputStream is = new FileInputStream(path.toFile().getName());
+        	InputStream is = new FileInputStream(path.toFile().getAbsoluteFile());
         	BufferedReader bf = new BufferedReader(new InputStreamReader(is));
         	
         	String linha = bf.readLine();
