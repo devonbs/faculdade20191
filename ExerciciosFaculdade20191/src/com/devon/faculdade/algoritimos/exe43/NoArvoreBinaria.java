@@ -1,44 +1,44 @@
 package com.devon.faculdade.algoritimos.exe43;
 
 public class NoArvoreBinaria<T> {
-	
-	private T info;
-	private NoArvoreBinaria<T> primeiro;
-	private NoArvoreBinaria<T> proximo;
-	
-	public NoArvoreBinaria(T info) {
-		this.info = info;
-		primeiro = null;
-		proximo = null;
-	}
-	
-	public void inserirFilho(NoArvoreBinaria<T> sa) {
-		sa.setProximo(primeiro);
-		setPrimeiro(sa);
-	}
 
-	public T getInfo() {
-		return info;
-	}
+    private T info;
+    private NoArvoreBinaria<T> esquerda;
+    private NoArvoreBinaria<T> direita;
 
-	public void setInfo(T info) {
-		this.info = info;
-	}
-
-	public NoArvoreBinaria<T> getPrimeiro() {
-		return primeiro;
-	}
-
-	public void setPrimeiro(NoArvoreBinaria<T> primeiro) {
-		this.primeiro = primeiro;
-	}
-
-	public NoArvoreBinaria<T> getProximo() {
-		return proximo;
-	}
-
-	public void setProximo(NoArvoreBinaria<T> proximo) {
-		this.proximo = proximo;
-	}
-
+    public NoArvoreBinaria(T info) {
+        this.setInfo(info);
+        esquerda = null;
+        direita = null;
+    }
+    
+    public NoArvoreBinaria(T info, NoArvoreBinaria<T> esq, NoArvoreBinaria<T> dir) {
+        this.setInfo(info);
+        this.setEsquerda(esq);
+        this.setDireita(dir);
+    }
+    
+    public void setInfo(T info) {
+        this.info = info;
+    }
+    
+    public T getInfo() {
+        return this.info;
+    }
+    
+    public void setEsquerda(NoArvoreBinaria<T> esquerda) {
+        this.esquerda = esquerda;
+    }
+    
+    public NoArvoreBinaria<T> getEsquerda() {
+        return this.esquerda;
+    }
+    
+    public void setDireita(NoArvoreBinaria<T> direita) {
+        this.direita = direita;
+    }
+    
+    public NoArvoreBinaria<T> getDireita() {
+        return this.direita;
+    }
 }
